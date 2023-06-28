@@ -36,7 +36,7 @@ void handle_init_contract(void *parameters) {
     memset(context, 0, sizeof(*context));
 
     uint32_t selector = U4BE(msg->selector, 0);
-    if (find_selector(selector, BOILERPLATE_SELECTORS, NUM_SELECTORS, &context->selectorIndex)) {
+    if (find_selector(selector, SOLIDIFI_SELECTORS, NUM_SELECTORS, &context->selectorIndex)) {
         msg->result = ETH_PLUGIN_RESULT_UNAVAILABLE;
         return;
     }
@@ -45,11 +45,10 @@ void handle_init_contract(void *parameters) {
     // EDIT THIS: Adapt the `cases`, and set the `next_param` to be the first parameter you expect
     // to parse.
     switch (context->selectorIndex) {
-        case SWAP_EXACT_ETH_FOR_TOKENS:
-            context->next_param = MIN_AMOUNT_RECEIVED;
+        case WRAP:
             break;
-        case BOILERPLATE_DUMMY_2:
-            context->next_param = TOKEN_RECEIVED;
+        case UNWRAP:
+            context->next_param = AMOUNT_RECEIVED;
             break;
         // Keep this
         default:
