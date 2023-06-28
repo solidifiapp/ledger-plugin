@@ -81,8 +81,8 @@ void handle_query_contract_ui(void *parameters) {
         case 1:
             set_receive_ui(msg, context);
             break;
-//         case 2:
-//             set_beneficiary_ui(msg, context);
+            //         case 2:
+            //             set_beneficiary_ui(msg, context);
             break;
         // Keep this
         default:
