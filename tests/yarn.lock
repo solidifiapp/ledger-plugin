@@ -1701,10 +1701,10 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@grpc/grpc-js@^1.8.8":
-  version "1.8.11"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.8.11.tgz#f113f7bc197e8d6f3d3f0c6b02925c7a5da1aec4"
-  integrity sha512-f/xC+6Z2QKsRJ+VSSFlt4hA5KSRm+PKvMWV8kMPkMgGlFidR6PeIkXrOasIY2roe+WROM6GFQLlgDKfeEZo2YQ==
+"@grpc/grpc-js@^1.8.12":
+  version "1.8.17"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.8.17.tgz#a3a2f826fc033eae7d2f5ee41e0ab39cee948838"
+  integrity sha512-DGuSbtMFbaRsyffMf+VEkVu8HkSXEUfO3UyGJNtqxW9ABdtTIA+2UXAJpwbJS+xfQxuwqLUeELmL6FuZkOqPxw==
   dependencies:
     "@grpc/proto-loader" "^0.7.0"
     "@types/node" ">=12.12.47"
@@ -2018,10 +2018,25 @@
     rxjs "6"
     semver "^7.3.5"
 
+"@ledgerhq/devices@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-8.0.4.tgz#ebc7779adbbec2d046424603a481623eb3fbe306"
+  integrity sha512-dxOiWZmtEv1tgw70+rW8gviCRZUeGDUnxY6HUPiRqTAc0Ts2AXxiJChgAsPvIywWTGW+S67Nxq1oTZdpRbdt+A==
+  dependencies:
+    "@ledgerhq/errors" "^6.12.7"
+    "@ledgerhq/logs" "^6.10.1"
+    rxjs "6"
+    semver "^7.3.5"
+
 "@ledgerhq/errors@^6.12.3":
   version "6.12.3"
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.12.3.tgz#a610caae1eeeb7cb038525e5212fe03217dda683"
   integrity sha512-djiMSgB/7hnK3aLR/c5ZMMivxjcI7o2+y3VKcsZZpydPoVf9+FXqeJPRfOwmJ0JxbQ//LinUfWpIfHew8LkaVw==
+
+"@ledgerhq/errors@^6.12.7":
+  version "6.12.7"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.12.7.tgz#c7b630488d5713bc7b1e1682d6ab5d08918c69f1"
+  integrity sha512-1BpjzFErPK7qPFx0oItcX0mNLJMplVAm2Dpl5urZlubewnTyyw5sahIBjU+8LLCWJ2eGEh/0wyvh0jMtR0n2Mg==
 
 "@ledgerhq/hw-app-eth@^6.27.1":
   version "6.32.0"
@@ -2039,13 +2054,24 @@
     bignumber.js "^9.1.0"
     crypto-js "^4.1.1"
 
-"@ledgerhq/hw-transport-http@^6.27.1", "@ledgerhq/hw-transport-http@^6.27.11":
+"@ledgerhq/hw-transport-http@^6.27.1":
   version "6.27.12"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.27.12.tgz#7121dcd50aeaa7f9aaa5f151548742c2f9e1d2f9"
   integrity sha512-4qG/de/SgYwzNy5boNYlCAvhMe5SpAMunkc/k/DMRkqsuOWJjxJ8vIQHvCCep5aGjDLjxy6v61vAm3w+/uf5gg==
   dependencies:
     "@ledgerhq/errors" "^6.12.3"
     "@ledgerhq/hw-transport" "^6.28.1"
+    "@ledgerhq/logs" "^6.10.1"
+    axios "^0.26.1"
+    ws "^7.5.2"
+
+"@ledgerhq/hw-transport-http@^6.27.12":
+  version "6.27.16"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.27.16.tgz#88909d676abb8aba9916c25524c6cbef8afd7da5"
+  integrity sha512-fqDhVslCoaWKy460efr/ArQHm9ICl8w0WwDPMpvsvWFJOaVBqG294RoHZrSChdKvPkeu1Bvy0Nq/h04vZWoVcQ==
+  dependencies:
+    "@ledgerhq/errors" "^6.12.7"
+    "@ledgerhq/hw-transport" "^6.28.5"
     "@ledgerhq/logs" "^6.10.1"
     axios "^0.26.1"
     ws "^7.5.2"
@@ -2058,13 +2084,22 @@
     "@ledgerhq/hw-transport" "^6.28.1"
     "@ledgerhq/logs" "^6.10.1"
 
-"@ledgerhq/hw-transport@^6.28.0", "@ledgerhq/hw-transport@^6.28.1":
+"@ledgerhq/hw-transport@^6.28.1":
   version "6.28.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.28.1.tgz#cb22fe9bc23af4682c30f2aac7fe6f7ab13ed65a"
   integrity sha512-RaZe+abn0zBIz82cE9tp7Y7aZkHWWbEaE2yJpfxT8AhFz3fx+BU0kLYzuRN9fmA7vKueNJ1MTVUCY+Ex9/CHSQ==
   dependencies:
     "@ledgerhq/devices" "^8.0.0"
     "@ledgerhq/errors" "^6.12.3"
+    events "^3.3.0"
+
+"@ledgerhq/hw-transport@^6.28.5":
+  version "6.28.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.28.5.tgz#675193be2f695a596068145351da598316c25831"
+  integrity sha512-xmw5RhYbqExBBqTvOnOjN/RYNIGMBxFJ+zcYNfkfw/E+uEY3L7xq8Z7sC/n7URTT6xtEctElqduBJnBQE4OQtw==
+  dependencies:
+    "@ledgerhq/devices" "^8.0.4"
+    "@ledgerhq/errors" "^6.12.7"
     events "^3.3.0"
 
 "@ledgerhq/logs@^6.10.1", "@ledgerhq/logs@^6.2.0":
@@ -2250,22 +2285,22 @@
   resolved "https://registry.yarnpkg.com/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
   integrity sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==
 
-"@zondax/zemu@^0.35.1":
-  version "0.35.1"
-  resolved "https://registry.yarnpkg.com/@zondax/zemu/-/zemu-0.35.1.tgz#5a5f083909b9699a6fe346ac0425ff3a5ba45644"
-  integrity sha512-v7JWBkmnyeZnt1RB6kD2NTc8h/Cl5aDHq/kX8a4KvV0Ay1jB+KAXsfCTtPN9jjc0hkTXB7qFMIFmp07EpM+jfg==
+"@zondax/zemu@^0.42.1":
+  version "0.42.1"
+  resolved "https://registry.yarnpkg.com/@zondax/zemu/-/zemu-0.42.1.tgz#b60ae867b6c5400d47c817097125e818ce11644f"
+  integrity sha512-qT4FgCeZuOL6MllGibNzaIeQy1S8OABFlBnyTNNRFOSf5BgeSAhYJsvQ15k1W/1uqC0PnhswgFcf/E7uk2IzkA==
   dependencies:
-    "@grpc/grpc-js" "^1.8.8"
+    "@grpc/grpc-js" "^1.8.12"
     "@grpc/proto-loader" "^0.7.5"
-    "@ledgerhq/hw-transport" "^6.28.0"
-    "@ledgerhq/hw-transport-http" "^6.27.11"
-    axios "^1.3.3"
+    "@ledgerhq/hw-transport" "^6.28.1"
+    "@ledgerhq/hw-transport-http" "^6.27.12"
+    axios "^1.3.4"
     axios-retry "^3.4.0"
     dockerode "^3.3.1"
     elfy "^1.0.0"
     fs-extra "^11.0.0"
     get-port "^5.1.1"
-    pngjs "^6.0.0"
+    pngjs "^7.0.0"
     randomstring "^1.2.3"
 
 acorn-jsx@^5.3.1:
@@ -2432,10 +2467,10 @@ axios@^0.26.1:
   dependencies:
     follow-redirects "^1.14.8"
 
-axios@^1.3.3:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.4.tgz#f5760cefd9cfb51fd2481acf88c05f67c4523024"
-  integrity sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==
+axios@^1.3.4:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.4.0.tgz#38a7bf1224cd308de271146038b551d725f0be1f"
+  integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -4889,10 +4924,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-pngjs@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-6.0.0.tgz#ca9e5d2aa48db0228a52c419c3308e87720da821"
-  integrity sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==
+pngjs@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-7.0.0.tgz#a8b7446020ebbc6ac739db6c5415a65d17090e26"
+  integrity sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==
 
 postinstall-postinstall@^2.1.0:
   version "2.1.0"
