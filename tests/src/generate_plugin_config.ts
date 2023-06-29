@@ -4,7 +4,7 @@
 // EDIT THIS: replace with the name of your plugin (lowercase)
 const pluginFolder = "solidifi";
 
-function serialize_data(pluginName, contractAddress, selector) {
+const serialize_data = (pluginName, contractAddress, selector) => {
 	const len = Buffer.from([pluginName.length]);
 	const name = Buffer.from(pluginName)
 	const address = Buffer.from(contractAddress.slice(2), "hex");
@@ -14,28 +14,28 @@ function serialize_data(pluginName, contractAddress, selector) {
 	return Buffer.concat([len, name, address, methodid]);
 }
 
-function assert(condition, message) {
+const assert = (condition, message) => {
 	if (!condition) {
 		throw message || "Assertion failed";
 	}
 }
 
 // Function to generate the plugin configuration.
-function generate_plugin_config(network="flare") {
+export const generate_plugin_config = (network="flare") => {
 
-	var fs = require('fs');
-	var files = fs.readdirSync(`networks/${network}/${pluginFolder}/abis/`);
-
+	const fs = require('fs');
+	const files = fs.readdirSync(__dirname + `/../networks/${network}/${pluginFolder}/abis/`);
 
 	// `contracts_to_abis` holds a maping of contract addresses to abis
 	let contracts_to_abis = {};
-	for (let abiFileName of files) {
+	for (const abiFileName of files) {
 		assert(abiFileName.toLocaleLowerCase() == abiFileName, `FAILED: File ${abiFileName} should be lower case.`);
 
 		// Strip ".json" suffix
-		let contractAddress = abiFileName.slice(0, abiFileName.length - ".json".length);
+		const contractAddress = abiFileName.slice(0, abiFileName.length - ".json".length);
 		// Load abi
-		let abi = require(`../networks/${network}/${pluginFolder}/abis/${abiFileName}`);
+		const abi = require(`../networks/${network}/${pluginFolder}/abis/${abiFileName}`);
+
 		// Add it to contracts
 		contracts_to_abis[contractAddress] = abi;
 	}
@@ -43,14 +43,13 @@ function generate_plugin_config(network="flare") {
 	// Load the b2c.json file
 	const b2c = require(`../networks/${network}/${pluginFolder}/b2c.json`);
 
-
-	let res = {};
+	let res: any = {};
 
 	// Place holder signature
 	const PLACE_HOLDER_SIGNATURE = "3045022100f6e1a922c745e244fa3ed9a865491672808ef93f492ee0410861d748c5de201f0220160d6522499f3a84fa3e744b3b81e49e129e997b28495e58671a1169b16fa777";
 
 	// Iterate through contracts in b2c.json file
-	for (let contract of b2c["contracts"]) {
+	for (const contract of b2c["contracts"]) {
 		let methods_info = {};
 		const contractAddress = contract["address"];
 		assert(contractAddress.toLowerCase() == contractAddress, `FAILED: Contract Address ${contractAddress} should be lower case`);
@@ -73,11 +72,7 @@ function generate_plugin_config(network="flare") {
 		res[contractAddress] = methods_info;
 	}
 
-	assert(res.length == contracts_to_abis.length, `FAILED: ${res.length} contracts in b2c.json and ${contracts_to_abis.length} contracts in abis/ folder`);
+	assert(Object.keys(res).length == Object.keys(contracts_to_abis).length, `FAILED: ${res.length} contracts in b2c.json and ${Object.keys(contracts_to_abis).length} contracts in abis/ folder`);
 
 	return res;
 }
-
-module.exports = {
-	generate_plugin_config,
-};
