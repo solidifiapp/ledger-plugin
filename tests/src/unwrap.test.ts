@@ -51,7 +51,7 @@ nano_models.forEach(function(model) {
 
   // Navigate the display by pressing the right button 10 times, then pressing both buttons to accept the transaction.
   const right_clicks = 6;
-  const shouldWaitForScreen = model.name !== 'nanox'
+  const shouldWaitForScreen = model.name !== 'nanox'; // bug fix for nano x
   await sim.navigateAndCompareSnapshots('.', model.name + '_unwrap', [right_clicks, 0],shouldWaitForScreen);
 
   await tx;
