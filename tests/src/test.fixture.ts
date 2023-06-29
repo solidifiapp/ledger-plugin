@@ -72,7 +72,12 @@ export const zemu = (device: IDeviceModel, func: (sim: Zemu, eth: Eth) => void) 
 
         const sim = new Zemu(elf_path, lib_elf);
         try {
-            await sim.start({...sim_options_nano, model: device.name});
+            const options = {
+                ...sim_options_nano,
+                startText: device.name === 'nanox' ? ' ' : sim_options_nano.startText, // bug fix for ledger nano x
+                model: device.name
+            }
+            await sim.start(options);
             const transport = await sim.getTransport();
             const eth = new Eth(transport);
             eth.setLoadConfig({
