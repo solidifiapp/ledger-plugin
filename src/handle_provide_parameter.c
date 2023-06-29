@@ -1,15 +1,8 @@
 #include "solidifi_plugin.h"
 
-// EDIT THIS: Remove this function and write your own handlers!
+// Handle Wrapping
 static void handle_wrap(ethPluginProvideParameter_t *msg, context_t *context) {
     switch (context->next_param) {
-        case AMOUNT_RECEIVED:  // amountOutMin
-            copy_parameter(context->amount_received,
-                           msg->parameter,
-                           sizeof(context->amount_received));
-            context->next_param = UNEXPECTED_PARAMETER;
-            break;
-        // Keep this
         default:
             PRINTF("Param not supported: %d\n", context->next_param);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
@@ -17,22 +10,22 @@ static void handle_wrap(ethPluginProvideParameter_t *msg, context_t *context) {
     }
 }
 
-// EDIT THIS: Remove this function and write your own handlers!
+// Handle Unwrapping
 static void handle_unwrap(ethPluginProvideParameter_t *msg, context_t *context) {
     switch (context->next_param) {
-        case AMOUNT_RECEIVED:  // amountOutMin
+        case AMOUNT_RECEIVED:
             copy_parameter(context->amount_received,
                            msg->parameter,
                            sizeof(context->amount_received));
             context->next_param = UNEXPECTED_PARAMETER;
             break;
-        // Keep this
         default:
             PRINTF("Param not supported: %d\n", context->next_param);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
             break;
     }
 }
+
 
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;

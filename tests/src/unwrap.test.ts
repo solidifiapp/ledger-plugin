@@ -17,10 +17,17 @@ const abi = require(abi_path);
 // EDIT THIS: build your own test
 nano_models.forEach(function(model) {
   jest.setTimeout(2000000)
-  test('[Nano ' + model.prefix + '] Wrap FLR', zemu(model, async (sim, eth) => {
-
+  test('[Nano ' + model.prefix + '] Unwrap FLR', zemu(model, async (sim, eth) => {
   const contract = new ethers.Contract(contractAddr, abi);
-  const {data} = await contract.populateTransaction.deposit();
+
+  // Constants used to create the transaction
+  // EDIT THIS: Remove what you don't need
+  const amount = parseEther("0.1");
+
+  // EDIT THIS: adapt the signature to your method
+  // signature: swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
+  // EDIT THIS: don't call `swapExactETHForTokens` but your own method and adapt the arguments.
+  const {data} = await contract.populateTransaction.withdraw(amount);
 
   // Get the generic transaction template
   let unsignedTx = genericTx;
@@ -53,7 +60,7 @@ nano_models.forEach(function(model) {
   await waitForAppScreen(sim);
   // Navigate the display by pressing the right button 10 times, then pressing both buttons to accept the transaction.
   // EDIT THIS: modify `10` to fix the number of screens you are expecting to navigate through.
-  await sim.navigateAndCompareSnapshots('.', model.name + '_wrap', [right_clicks, 0],);
+  await sim.navigateAndCompareSnapshots('.', model.name + '_unwrap', [right_clicks, 0],);
 
   await tx;
   }));
