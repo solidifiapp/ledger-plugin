@@ -1,4 +1,4 @@
-#include "boilerplate_plugin.h"
+#include "solidifi_plugin.h"
 
 // EDIT THIS: Remove this function and write your own handlers!
 static void handle_wrap(ethPluginProvideParameter_t *msg, context_t *context) {

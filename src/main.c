@@ -24,7 +24,7 @@
 
 #include "glyphs.h"
 
-#include "boilerplate_plugin.h"
+#include "solidifi_plugin.h"
 
 // List of selectors supported by this plugin.
 // EDIT THIS: Adapt the variable names and change the `0x` values to match your selectors.
@@ -32,7 +32,7 @@ static const uint32_t WRAP_SELECTOR = 0xd0e30db0;
 static const uint32_t UNWRAP_SELECTOR = 0x2e1a7d4d;
 
 // Array of all the different boilerplate selectors. Make sure this follows the same order as the
-// enum defined in `boilerplate_plugin.h`
+// enum defined in `solidifi_plugin.h`
 // EDIT THIS: Use the names of the array declared above.
 const uint32_t SOLIDIFI_SELECTORS[NUM_SELECTORS] = {
     WRAP_SELECTOR,
