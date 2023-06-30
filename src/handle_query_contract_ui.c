@@ -1,17 +1,23 @@
 #include "solidifi_plugin.h"
 
 void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
+
+    const uint8_t *eth_amount = msg->pluginSharedRO->txContent->value.value;
+    uint8_t eth_amount_size = msg->pluginSharedRO->txContent->value.length;
+
     switch (msg->screenIndex) {
         case 0:
             strlcpy(msg->title, "Wrap", msg->titleLength);
 
-            const uint8_t *eth_amount = msg->pluginSharedRO->txContent->value.value;
-            uint8_t eth_amount_size = msg->pluginSharedRO->txContent->value.length;
 
             // Converts the uint256 number located in `eth_amount` to its string representation and
             // copies this to `msg->msg`.
-            amountToString(eth_amount, eth_amount_size, WEI_TO_ETHER, "FLR", msg->msg, msg->msgLength);
-
+            amountToString(eth_amount,
+                           eth_amount_size,
+                           WEI_TO_ETHER,
+                           "FLR",
+                           msg->msg,
+                           msg->msgLength);
             break;
         case  1:
             strlcpy(msg->title, "Receive", msg->titleLength);
@@ -19,8 +25,6 @@ void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
             uint8_t decimals = context->decimals;
             const char *ticker = context->ticker;
 
-            const uint8_t *eth_amount = msg->pluginSharedRO->txContent->value.value;
-            uint8_t eth_amount_size = msg->pluginSharedRO->txContent->value.length;
             amountToString(eth_amount,
                            eth_amount_size,
                            WEI_TO_ETHER,
@@ -28,7 +32,7 @@ void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
                            msg->msg,
                            msg->msgLength);
 
-           break;
+            break;
         default:
             PRINTF("Received an invalid screenIndex\n");
             msg->result = ETH_PLUGIN_RESULT_ERROR;
@@ -40,16 +44,21 @@ void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
 
 void handle_unwrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
 
+    const uint8_t *eth_amount = context->amount_received;
+    uint8_t eth_amount_size = sizeof(context->amount_received);
+
     switch (msg->screenIndex) {
         case 0:
             strlcpy(msg->title, "Unwrap", msg->titleLength);
 
-            const uint8_t *eth_amount = context->amount_received;
-            uint8_t eth_amount_size = sizeof(context->amount_received);
-
             // Converts the uint256 number located in `eth_amount` to its string representation and
             // copies this to `msg->msg`.
-            amountToString(eth_amount, eth_amount_size, WEI_TO_ETHER, "WFLR", msg->msg, msg->msgLength);
+              amountToString(eth_amount,
+                             eth_amount_size,
+                             WEI_TO_ETHER,
+                             "WFLR",
+                             msg->msg,
+                             msg->msgLength);
 
             break;
         case  1:
@@ -58,15 +67,13 @@ void handle_unwrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
             uint8_t decimals = context->decimals;
             const char *ticker = context->ticker;
 
-            const uint8_t *eth_amount = context->amount_received;
-            uint8_t eth_amount_size = sizeof(context->amount_received);
-
             amountToString(eth_amount,
                            eth_amount_size,
                            WEI_TO_ETHER,
-                           "WFLR",
+                           ticker,
                            msg->msg,
                            msg->msgLength);
+
             break;
         default:
             PRINTF("Received an invalid screenIndex\n");
@@ -88,7 +95,7 @@ void handle_query_contract_ui(void *parameters) {
     memset(msg->title, 0, msg->titleLength);
     memset(msg->msg, 0, msg->msgLength);
 
-   switch (context->selectorIndex) {
+    switch (context->selectorIndex) {
         case WRAP:
             handle_wrap_ui(msg, context);
             break;
