@@ -33,6 +33,7 @@ typedef struct context_t {
     char ticker[MAX_TICKER_LEN];
     uint8_t decimals;
     uint8_t token_found;
+    uint8_t num_screens;
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.
