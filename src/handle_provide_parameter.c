@@ -1,15 +1,5 @@
 #include "solidifi_plugin.h"
 
-// Handle Wrapping
-static void handle_wrap(ethPluginProvideParameter_t *msg, context_t *context) {
-    switch (context->next_param) {
-        default:
-            PRINTF("Param not supported: %d\n", context->next_param);
-            msg->result = ETH_PLUGIN_RESULT_ERROR;
-            break;
-    }
-}
-
 // Handle Unwrapping
 static void handle_unwrap(ethPluginProvideParameter_t *msg, context_t *context) {
     switch (context->next_param) {
@@ -26,10 +16,10 @@ static void handle_unwrap(ethPluginProvideParameter_t *msg, context_t *context) 
     }
 }
 
-
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
     context_t *context = (context_t *) msg->pluginContext;
+
     // We use `%.*H`: it's a utility function to print bytes. You first give
     // the number of bytes you wish to print (in this case, `PARAMETER_LENGTH`) and then
     // the address (here `msg->parameter`).
@@ -40,10 +30,10 @@ void handle_provide_parameter(void *parameters) {
 
     msg->result = ETH_PLUGIN_RESULT_OK;
 
-    // EDIT THIS: adapt the cases and the names of the functions.
     switch (context->selectorIndex) {
         case WRAP:
-            handle_wrap(msg, context);
+            // No parameters for deposit
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
             break;
         case UNWRAP:
             handle_unwrap(msg, context);
