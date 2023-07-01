@@ -1,14 +1,12 @@
 #include "solidifi_plugin.h"
 
 void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
-
     const uint8_t *eth_amount = msg->pluginSharedRO->txContent->value.value;
     uint8_t eth_amount_size = msg->pluginSharedRO->txContent->value.length;
 
     switch (msg->screenIndex) {
         case 0:
             strlcpy(msg->title, "Wrap", msg->titleLength);
-
 
             // Converts the uint256 number located in `eth_amount` to its string representation and
             // copies this to `msg->msg`.
@@ -19,16 +17,13 @@ void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
                            msg->msg,
                            msg->msgLength);
             break;
-        case  1:
+        case 1:
             strlcpy(msg->title, "Receive", msg->titleLength);
-
-            uint8_t decimals = context->decimals;
-            const char *ticker = context->ticker;
 
             amountToString(eth_amount,
                            eth_amount_size,
                            WEI_TO_ETHER,
-                           ticker,
+                           "WFLR",
                            msg->msg,
                            msg->msgLength);
 
@@ -43,7 +38,6 @@ void handle_wrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
 }
 
 void handle_unwrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
-
     const uint8_t *eth_amount = context->amount_received;
     uint8_t eth_amount_size = sizeof(context->amount_received);
 
@@ -53,24 +47,21 @@ void handle_unwrap_ui(ethQueryContractUI_t *msg, const context_t *context) {
 
             // Converts the uint256 number located in `eth_amount` to its string representation and
             // copies this to `msg->msg`.
-              amountToString(eth_amount,
-                             eth_amount_size,
-                             WEI_TO_ETHER,
-                             "WFLR",
-                             msg->msg,
-                             msg->msgLength);
+            amountToString(eth_amount,
+                           eth_amount_size,
+                           WEI_TO_ETHER,
+                           "WFLR",
+                           msg->msg,
+                           msg->msgLength);
 
             break;
-        case  1:
+        case 1:
             strlcpy(msg->title, "Receive", msg->titleLength);
-
-            uint8_t decimals = context->decimals;
-            const char *ticker = context->ticker;
 
             amountToString(eth_amount,
                            eth_amount_size,
                            WEI_TO_ETHER,
-                           ticker,
+                           "FLR",
                            msg->msg,
                            msg->msgLength);
 
@@ -105,5 +96,6 @@ void handle_query_contract_ui(void *parameters) {
         default:
             PRINTF("Selector index: %d not supported\n", context->selectorIndex);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
     }
 }

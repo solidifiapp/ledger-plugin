@@ -45,11 +45,11 @@ void handle_init_contract(void *parameters) {
     switch (context->selectorIndex) {
         case WRAP:
             context->next_param = UNEXPECTED_PARAMETER;
-            context->num_screens = 1;
+            context->num_screens = 2;
             break;
         case UNWRAP:
             context->next_param = AMOUNT_RECEIVED;
-            context->num_screens = 1;
+            context->num_screens = 2;
             break;
         // Keep this
         default:
